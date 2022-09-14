@@ -2,7 +2,6 @@ package homework;
 
 import java.util.*;
 
-import static java.util.stream.Collectors.groupingBy;
 
 public class ComplexExamples {
 
@@ -37,7 +36,7 @@ public class ComplexExamples {
         }
     }
 
-    private static Person[] RAW_DATA = new Person[]{
+    private static final Person[] RAW_DATA = new Person[]{
             new Person(0, "Harry"),
             new Person(0, "Harry"), // дубликат
             new Person(1, "Harry"), // тёзка
@@ -120,12 +119,12 @@ public class ComplexExamples {
                 arrayList.add(rawDatum);
             }
         }
-        TreeMap <String, Integer> map = new TreeMap<>();
+        TreeMap<String, Integer> map = new TreeMap<>();
         for (Person p : arrayList) {
             if (map.containsKey(p.name)) {
                 map.put(p.name, map.get(p.name) + 1);
             } else {
-            map.put(p.name, 1);
+                map.put(p.name, 1);
             }
         }
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
@@ -170,6 +169,7 @@ public class ComplexExamples {
         fuzzySearch("lw", "cartwheel"); // false
 
     }
+
     static int searchSum(int[] array, int searchNum) {
         for (int i = 0; i < array.length; i++) {
             for (int j = i + 1; j < array.length; j++) {
@@ -179,6 +179,7 @@ public class ComplexExamples {
         }
         return 0;
     }
+
     static void fuzzySearch(String firstStr, String secondStr) {
         StringBuilder newStr = new StringBuilder();
         for (int i = 0; i < secondStr.length(); i++) {
