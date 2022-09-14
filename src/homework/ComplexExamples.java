@@ -86,6 +86,7 @@ public class ComplexExamples {
      */
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Raw data:");
         System.out.println();
 
@@ -114,12 +115,11 @@ public class ComplexExamples {
                 Value:1
          */
         ArrayList<Person> arrayList = new ArrayList<>();
-        for (int i = 0; i < RAW_DATA.length; i++) {
-            if (!arrayList.contains(RAW_DATA[i])) {
-                arrayList.add(RAW_DATA[i]);
+        for (Person rawDatum : RAW_DATA) {
+            if (!arrayList.contains(rawDatum)) {
+                arrayList.add(rawDatum);
             }
         }
-
         TreeMap <String, Integer> map = new TreeMap<>();
         for (Person p : arrayList) {
             if (map.containsKey(p.name)) {
@@ -139,18 +139,16 @@ public class ComplexExamples {
             [3, 4, 2, 7], 10 -> [3, 7] - вывести пару менно в скобках, которые дают сумму - 10
          */
         System.out.println("****************************************************************************************************");
-        System.out.println("Task 2\n");
-        int[] array = {3, 4, 2, 7};
-        int num = 10, firstNum = 0, lastNum = array.length - 1;
-        while (firstNum < lastNum){
-            int sumArr = array[firstNum] + array[lastNum];
-            if (sumArr == num) System.out.println("Пара, которая дает сумму 10: " + array[firstNum] + " и " + array[lastNum]);
-            if (sumArr < num) {
-                firstNum++;
-            } else {
-                lastNum--;
-            }
+        System.out.println("Task 2\nВведите размер массива: ");
+        int number = scanner.nextInt();
+        int[] array = new int[number];
+        System.out.println("Введите значения:");
+        for (int i = 0; i < array.length; i++) {
+            array[i] = scanner.nextInt();
         }
+        System.out.println("Введите сумму, которую хотите найти:");
+        int searchNum = scanner.nextInt();
+        System.out.println(searchSum(array, searchNum));
 
         /*
         Task3
@@ -171,6 +169,15 @@ public class ComplexExamples {
         fuzzySearch("cwheeel", "cartwheel"); // false
         fuzzySearch("lw", "cartwheel"); // false
 
+    }
+    static int searchSum(int[] array, int searchNum) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i] + array[j] == searchNum)
+                    System.out.println("Пара, которая дает сумму " + searchNum + ": [" + array[i] + ", " + array[j] + "]");
+            }
+        }
+        return 0;
     }
     static void fuzzySearch(String firstStr, String secondStr) {
         StringBuilder newStr = new StringBuilder();
